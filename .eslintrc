@@ -1,0 +1,46 @@
+{
+  "extends": "airbnb",
+  "plugins": ["react-hooks"],
+  "rules": {
+    "no-console": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/jsx-indent": ["error", 2],
+    "jsx-quotes": ["error", "prefer-single"],
+    "semi": "off",
+    "import/prefer-default-export": "off",
+    "react/jsx-filename-extension": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "import/no-unresolved": "off",
+    "react/prop-types": "off",
+    "import/no-extraneous-dependencies": "off",
+    "spaced-comment": "off",
+    "camelcase": "off",
+    "no-trailing-spaces": "off",
+    "arrow-parens": "off",
+    "react/jsx-props-no-spreading": "off",
+    "linebreak-style": "off",
+    "react/jsx-tag-spacing": ["error", { "beforeSelfClosing": "always" }],
+    "jsx-a11y/control-has-associated-label": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "jsx-a11y/click-events-have-key-events": "off"
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "parser": "babel-eslint",
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"],
+        "extensions": [
+          ".ts",
+          ".tsx",
+          ".js",
+          ".jsx"
+        ]
+      }
+    }
+  }
+}
