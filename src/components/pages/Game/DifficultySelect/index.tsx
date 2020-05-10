@@ -8,13 +8,14 @@ import { selectDifficulty } from 'ducks/modules/difficulty'
 import { State } from 'interfaces'
 
 const wrapperStyles = css`
+  padding-top: 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
 `
 
 const headerStyles = css`
-  font-size: 16px;
+  font-size: 18px;
   padding-bottom: 4px;
 `
 
@@ -23,7 +24,11 @@ const selectStyles = css`
   font-family: 'Barlow', sans-serif;
 `
 
-export const DifficultySelect = () => {
+interface DifficultySelectProps {
+  isPlaying: boolean,
+}
+
+export const DifficultySelect: React.FC<DifficultySelectProps> = ({ isPlaying }) => {
   const dispatch = useDispatch()
   const difficulty = useSelector<State, string>(state => state.difficulty)
 
@@ -34,6 +39,7 @@ export const DifficultySelect = () => {
         css={selectStyles}
         value={difficulty}
         onChange={(e) => dispatch(selectDifficulty(e.target.value))}
+        disabled={isPlaying}
         autoWidth
       >
         {Object.keys(DifficultyLevels).map((level, i) => (

@@ -3,6 +3,7 @@
   "plugins": ["react-hooks"],
   "rules": {
     "no-console": "off",
+    "consistent-return": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/jsx-indent": ["error", 2],

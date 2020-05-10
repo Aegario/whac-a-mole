@@ -13,5 +13,5 @@ export const selectDifficulty = createAction(DifficultyActions.selectDifficulty)
 //#region Reducers
 export const difficultyReducer = handleActions({
   [DifficultyActions.selectDifficulty]: (state, { payload }) => payload,
-}, 'BEGINNER')
+}, 'NORMAL')
 //#endregion

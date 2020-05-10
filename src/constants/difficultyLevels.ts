@@ -1,6 +1,6 @@
 export enum DifficultyLevels {
-  BEGINNER = 'Beginner',
-  NORMAL = 'Normal',
-  PRO = 'God',
-  GOD = 'God',
+  BEGINNER = 'BEGINNER',
+  NORMAL = 'NORMAL',
+  PRO = 'PRO',
+  GOD = 'GOD',
 }
