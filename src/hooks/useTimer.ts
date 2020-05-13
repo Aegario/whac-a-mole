@@ -35,8 +35,8 @@ export const useTimer = (seconds: number) => {
 
   return {
     timeLeft,
+    timeUp,
     start,
     reset,
-    timeUp,
   }
 }

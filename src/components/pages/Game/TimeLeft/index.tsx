@@ -16,11 +16,14 @@ const spanStyles = (theme: Theme) => css`
   background-color: ${theme.palette.primary.light};
 `
 
-interface TimeLeftProps { timeLeft: number }
+interface TimeLeftProps {
+  timeLeft: number,
+  timeUp: boolean,
+}
 
-export const TimeLeft: React.FC<TimeLeftProps> = ({ timeLeft }) => (
+export const TimeLeft: React.FC<TimeLeftProps> = ({ timeLeft, timeUp }) => (
   <h1 css={headerStyles}>
-    Time left:
+    {timeUp ? 'Time\'s UP :' : 'Time left :'}
     <span css={spanStyles}>
       {timeLeft}
     </span>

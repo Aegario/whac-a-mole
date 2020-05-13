@@ -26,10 +26,8 @@ export const configureStore = () => {
     applyMiddleware(...middlewares),
   )
 
-  const store = createStore(
+  return createStore(
     reducer,
     enhancer,
   )
-
-  return store
 }

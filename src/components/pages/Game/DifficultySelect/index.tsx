@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 import { MenuItem, Select } from '@material-ui/core'
 import { css } from '@emotion/core'
 
 import { DifficultyLevels } from 'constants/difficultyLevels'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectDifficulty } from 'ducks/modules/difficulty'
+import { scoreReset } from 'ducks/modules/score'
 import { State } from 'interfaces'
 
 const wrapperStyles = css`
@@ -26,11 +27,23 @@ const selectStyles = css`
 
 interface DifficultySelectProps {
   isPlaying: boolean,
+  reset: () => void,
+  timeUp: boolean,
 }
 
-export const DifficultySelect: React.FC<DifficultySelectProps> = ({ isPlaying }) => {
+export const DifficultySelect: React.FC<DifficultySelectProps> = ({ isPlaying, reset, timeUp }) => {
   const dispatch = useDispatch()
   const difficulty = useSelector<State, string>(state => state.difficulty)
+
+  // eslint-disable-next-line no-undef
+  const handleDifficultyChange = (e: ChangeEvent<{ name?: string; value: unknown}>) => {
+    dispatch(selectDifficulty(e.target.value))
+
+    if (timeUp) {
+      dispatch(scoreReset())
+      reset()
+    }
+  }
 
   return (
     <div css={wrapperStyles}>
@@ -38,7 +51,7 @@ export const DifficultySelect: React.FC<DifficultySelectProps> = ({ isPlaying })
       <Select
         css={selectStyles}
         value={difficulty}
-        onChange={(e) => dispatch(selectDifficulty(e.target.value))}
+        onChange={handleDifficultyChange}
         disabled={isPlaying}
         autoWidth
       >

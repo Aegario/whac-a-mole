@@ -69,7 +69,7 @@ export const Game: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false)
   const score = useSelector<State, number>(state => state.score)
   const dispatch = useDispatch()
-  const timer = useTimer(10)
+  const timer = useTimer(1)
 
   const startGame = () => {
     setIsPlaying(true)
@@ -90,12 +90,19 @@ export const Game: React.FC = () => {
       <Header />
       <Container>
         <div css={headerWrapperStyles}>
-          <TimeLeft timeLeft={timer.timeLeft} />
+          <TimeLeft
+            timeUp={timer.timeUp}
+            timeLeft={timer.timeLeft}
+          />
           <div css={mainWrapperStyles}>
             <h1 css={mainHeaderStyles}>{timer.timeUp ? 'GAME OVER!' : 'Whac-A-Mole!'}</h1>
             <h2 css={scoreHeaderStyles}>Score: <span css={scoreStyles}>{score}</span></h2>
           </div>
-          <DifficultySelect isPlaying={isPlaying} />
+          <DifficultySelect
+            isPlaying={isPlaying}
+            reset={timer.reset}
+            timeUp={timer.timeUp}
+          />
         </div>
 
         <Board isPlaying={isPlaying} />

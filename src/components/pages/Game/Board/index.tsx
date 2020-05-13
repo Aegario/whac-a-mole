@@ -75,24 +75,24 @@ export const Board: React.FC<BoardProps> = ({ isPlaying }) => {
 
     switch (difficultyLevel) {
       case DifficultyLevels.BEGINNER:
-        min = 1000
-        max = 1100
+        min = 800
+        max = 1000
         break
       case DifficultyLevels.NORMAL:
-        min = 700
-        max = 800
+        min = 600
+        max = 700
         break
       case DifficultyLevels.PRO:
         min = 400
-        max = 500
+        max = 450
         break
       case DifficultyLevels.GOD:
-        min = 250
-        max = 350
+        min = 300
+        max = 400
         break
       default:
-        min = 700
-        max = 800
+        min = 600
+        max = 700
     }
 
     return min + Math.random() * (max - min)
