@@ -14,7 +14,7 @@ import { globalStyles } from 'constants/globalStyles'
 import { Routes } from 'constants/routes'
 import { ProtectedRoute } from 'components/common/ProtectedRoute'
 import { Game } from 'components/pages/Game'
-import { Top } from 'components/pages/Top'
+//import { Top } from 'components/pages/Top'
 import { Register } from 'components/pages/Register'
 import { Login } from 'components/pages/Login'
 import { Colors } from 'constants/colors'
@@ -31,9 +31,9 @@ const theme = createMuiTheme({
     },
   },
   typography: {
-    fontFamily: ['Barlow', 'Permanent Marker'].join(','),
+    fontFamily: ['Lato', 'Permanent Marker'].join(','),
     button: {
-      fontWeight: 700,
+      fontWeight: 900,
     },
   },
 })
@@ -48,7 +48,7 @@ export const App = () => {
         <Router>
           <Switch>
             <ProtectedRoute exact path={Routes.root} component={Game} />
-            <ProtectedRoute path={Routes.top} component={Top} />
+            {/*<ProtectedRoute path={Routes.top} component={Top} />*/}
             <Route path={Routes.login}>
               {isLoggedIn ? <Redirect to={Routes.root} /> : <Login />}
             </Route>

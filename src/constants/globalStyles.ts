@@ -41,6 +41,8 @@ export const globalStyles = css`
     color: black;
     @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Barlow&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;700;800;900&display=swap');
+   /* font-family: 'Lato', sans-serif;*/
     /*font-family: 'Barlow', sans-serif;*/
     font-family: 'Permanent Marker', cursive;
     -webkit-box-sizing: border-box;

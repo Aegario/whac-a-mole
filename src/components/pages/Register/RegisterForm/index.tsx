@@ -11,6 +11,7 @@ import {
 
 import { TextField } from 'components/common/TextField'
 import { Button } from 'components/common/Button'
+import { AuthFormHeader } from 'components/common/AuthFormHeader'
 
 //#region Styles
 const formStyles = css`
@@ -19,28 +20,19 @@ const formStyles = css`
   justify-content: center;
   align-items: center;
   padding: 18px 32px 30px;
-  font-family: 'Barlow', sans-serif;
-`
-
-const headerStyles = css`
-  padding-bottom: 18px;
-  font-size: 28px;
+  font-family: 'Lato', sans-serif;
 `
 
 const textFieldStyles = css`
   && {
-    margin: 4px 0;
+    margin: 5px 0;
     width: 100%;
-    
-    label {
-      font-size: 14px;
-    }
   }
 `
 
 const buttonStyles = css`
   && {
-    margin-top: 4px;
+    margin-top: 5px;
   }
 `
 //#endregion
@@ -65,7 +57,7 @@ export const RegisterForm: React.FC = () => (
   >
     {(formik: FormikProps<any>) => (
       <Form css={formStyles}>
-        <h1 css={headerStyles}>Register</h1>
+        <AuthFormHeader title='Register' />
         <Field type='text' name='username'>
           {(fieldProps: FieldProps) => (
             <TextField

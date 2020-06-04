@@ -6,7 +6,7 @@ import { Container } from 'components/common/Container'
 import { RegisterForm } from 'components/pages/Register/RegisterForm'
 
 const wrapperStyles = css`
-  width: 300px;
+  width: 380px;
 `
 
 export const Register: React.FC = () => (

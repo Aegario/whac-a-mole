@@ -13,10 +13,6 @@ import {
 const errorIconStyles = (theme: Theme) => css`
   color: ${theme.palette.error.main};
   cursor: pointer;
-  
-  && {
-    font-size: 24px;
-  }
 `
 
 const tooltipStyles = css`
@@ -26,8 +22,12 @@ const tooltipStyles = css`
 
 const styles = (theme: Theme) => css`
   && {
+    label.Mui-focused {
+      font-weight: 700;
+    }
+    
     .MuiOutlinedInput-adornedEnd {
-      padding-right: 8px;
+      padding-right: 12px;
     }
     
     .Mui-error fieldset {
@@ -64,7 +64,6 @@ export const TextField: React.FC<FieldPropsTextField> = ({
       color='secondary'
       error={!!showError}
       InputProps={{
-        style: { fontSize: '14px' },
         endAdornment: showError ? (
           <InputAdornment position='end'>
             <Tooltip title={(

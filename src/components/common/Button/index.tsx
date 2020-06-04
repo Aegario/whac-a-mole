@@ -23,7 +23,6 @@ export const Button: React.FC<CustomButtonProps> = ({ children, isFetching = fal
     css={buttonStyles}
     color='secondary'
     variant='contained'
-    size='small'
     disabled={isFetching || rest.disabled}
     {...rest}
   >

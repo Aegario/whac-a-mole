@@ -1,5 +1,6 @@
 import React from 'react'
 import { css } from '@emotion/core'
+/*
 
 import { Header } from 'components/common/Header'
 import { RootContainer } from 'components/common/RootContainer'
@@ -10,7 +11,7 @@ export const Top: React.FC = () => {
   const props = useSprings()
 
   const items = ['asd', 'adad', 'asdasdsa', 'Kek', 'asdas']
-  const springs = useSprings(number, items.map(item => ({ opacity: item.opacity }))
+  const springs = useSprings(number, items.map(item => ({ opacity: item.opacity })))
 
   return (
     <RootContainer>
@@ -24,3 +25,4 @@ export const Top: React.FC = () => {
     </RootContainer>
   )
 }
+*/
