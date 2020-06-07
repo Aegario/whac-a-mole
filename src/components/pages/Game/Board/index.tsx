@@ -5,7 +5,7 @@ import { css } from '@emotion/core'
 import dirt from 'assets/dirt.svg'
 import mole from 'assets/mole.svg'
 import { useDispatch, useSelector } from 'react-redux'
-import { scoreIncrement } from 'ducks/modules/score'
+import { scoreIncrement } from 'ducks/modules/game/score'
 import { DifficultyLevels } from 'constants/difficultyLevels'
 import { State } from 'interfaces'
 
@@ -51,7 +51,7 @@ interface BoardProps {
 }
 
 export const Board: React.FC<BoardProps> = ({ isPlaying }) => {
-  const difficulty = useSelector<State, string>(state => state.difficulty)
+  const difficulty = useSelector<State, string>(state => state.game.difficulty)
   const [molesActiveStatus, setMolesActiveStatus] = useState<boolean[]>(
     [false, false, false, false, false, false],
   )

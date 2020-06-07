@@ -12,6 +12,10 @@ export enum AuthActions {
   loginRequest = 'LOGIN_REQUEST',
   loginSuccess = 'LOGIN_SUCCESS',
   loginFailure = 'LOGIN_FAILURE',
+
+  fetchProfileRequest = 'FETCH_PROFILE_REQUEST',
+  fetchProfileSuccess = 'FETCH_PROFILE_SUCCESS',
+  fetchProfileFailure = 'FETCH_PROFILE_FAILURE',
 }
 
 const registerRequest = createAction(AuthActions.registerRequest)
@@ -21,17 +25,22 @@ const registerFailure = createAction(AuthActions.registerFailure)
 const loginRequest = createAction(AuthActions.loginRequest)
 const loginSuccess = createAction(AuthActions.loginSuccess)
 const loginFailure = createAction(AuthActions.loginFailure)
+
+const fetchProfileRequest = createAction(AuthActions.fetchProfileRequest)
+const fetchProfileSuccess = createAction(AuthActions.fetchProfileSuccess)
+const fetchProfileFailure = createAction(AuthActions.fetchProfileFailure)
 //#endregion
 
 //#region Reducers
 export const authReducer = handleActions({
-  [AuthActions.registerSuccess]: () => true,
-  [AuthActions.loginSuccess]: () => true,
-}, true)
+  [AuthActions.registerSuccess]: (state, { payload }) => payload,
+  [AuthActions.loginSuccess]: (state, { payload }) => payload,
+  [AuthActions.fetchProfileSuccess]: (state, { payload }) => payload,
+}, {})
 //#endregion
 
 interface UserData {
-  username: string,
+  name: string,
   password: string,
 }
 
@@ -42,35 +51,51 @@ export const register = (
   dispatch(registerRequest(userData))
 
   try {
-    const { data } = await axios('/register', {
+    const { data: { data } } = await axios('/register', {
       method: 'POST',
       data: userData,
     })
 
-    dispatch(registerSuccess(data));
-    return data
+    axios.defaults.headers.common.Authorization = `Bearer ${data.token}`
+    localStorage.setItem('token', data.token)
+    dispatch(registerSuccess({ user: data.user }));
   } catch (err) {
     dispatch(registerFailure())
-    throw new Error(err)
+    return err
   }
 }
 
 export const login = (
   userData: UserData,
 ) => async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
-  dispatch(loginRequest(userData))
+  dispatch(loginRequest())
 
   try {
-    const { data } = await axios('/login', {
+    const { data: { data } } = await axios('/login', {
       method: 'POST',
       data: userData,
     })
 
-    dispatch(loginSuccess(data));
-    return data
+    axios.defaults.headers.common.Authorization = `Bearer ${data.token}`
+    localStorage.setItem('token', data.token)
+    dispatch(loginSuccess({ user: data.user }));
   } catch (err) {
     dispatch(loginFailure())
-    throw new Error(err)
+    return {
+      name: 'Invalid email or password',
+    }
+  }
+}
+
+export const fetchProfile = () => async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
+  dispatch(fetchProfileRequest())
+
+  try {
+    const { data: { data } } = await axios('/profile')
+    dispatch(fetchProfileSuccess({ user: data }))
+  } catch (err) {
+    dispatch(fetchProfileFailure())
+    return err
   }
 }
 //#endregion

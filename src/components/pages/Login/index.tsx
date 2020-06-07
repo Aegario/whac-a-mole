@@ -6,7 +6,7 @@ import { Container } from 'components/common/Container'
 import { LoginForm } from 'components/pages/Login/LoginForm'
 
 const wrapperStyles = css`
-  width: 380px;
+  width: 372px;
 `
 
 export const Login: React.FC = () => (

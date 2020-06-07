@@ -12,7 +12,8 @@ import { TimeLeft } from 'components/pages/Game/TimeLeft'
 import { useTimer } from 'hooks/useTimer'
 import { useDispatch, useSelector } from 'react-redux'
 import { State } from 'interfaces'
-import { scoreReset } from 'ducks/modules/score'
+import { scoreReset } from 'ducks/modules/game/score'
+import { postScore } from 'ducks/modules/game'
 
 //#region Styles
 const mainHeaderStyles = css`
@@ -67,9 +68,9 @@ const mainWrapperStyles = css`
 
 export const Game: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false)
-  const score = useSelector<State, number>(state => state.score)
+  const score = useSelector<State, number>(state => state.game.score)
   const dispatch = useDispatch()
-  const timer = useTimer(1)
+  const timer = useTimer(10)
 
   const startGame = () => {
     setIsPlaying(true)
@@ -81,9 +82,10 @@ export const Game: React.FC = () => {
     if (timer.timeUp) {
       setIsPlaying(false)
 
-      //and submit the score
+
+      dispatch(postScore())
     }
-  }, [timer.timeUp])
+  }, [dispatch, timer.timeUp])
 
   return (
     <RootContainer>
@@ -95,8 +97,12 @@ export const Game: React.FC = () => {
             timeLeft={timer.timeLeft}
           />
           <div css={mainWrapperStyles}>
-            <h1 css={mainHeaderStyles}>{timer.timeUp ? 'GAME OVER!' : 'Whac-A-Mole!'}</h1>
-            <h2 css={scoreHeaderStyles}>Score: <span css={scoreStyles}>{score}</span></h2>
+            <h1 css={mainHeaderStyles}>
+              {timer.timeUp ? 'GAME OVER!' : 'Whac-A-Mole!'}
+            </h1>
+            <h2 css={scoreHeaderStyles}>
+              Score: <span css={scoreStyles}>{score}</span>
+            </h2>
           </div>
           <DifficultySelect
             isPlaying={isPlaying}

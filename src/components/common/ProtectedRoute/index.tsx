@@ -15,7 +15,7 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   component: Component,
   ...props
 }) => {
-  const isLoggedIn = useSelector<State, boolean>(state => (state.auth))
+  const isLoggedIn = useSelector<State, string>(state => (state.auth?.user?.name))
 
   return (
     <Route

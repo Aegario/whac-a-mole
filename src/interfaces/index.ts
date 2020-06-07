@@ -1,5 +1,16 @@
+import { AuthState } from 'interfaces/auth'
+import { LoadingState } from 'interfaces/loading'
+import { GameState } from 'interfaces/game'
+import { TopState } from 'interfaces/top'
+
+export interface User {
+  _id: string,
+  name: string,
+}
+
 export interface State {
-  auth: boolean,
-  difficulty: string,
-  score: number,
+  auth: AuthState,
+  loading: LoadingState,
+  game: GameState,
+  top: TopState,
 }
