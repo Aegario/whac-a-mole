@@ -26,6 +26,6 @@ export const Button: React.FC<CustomButtonProps> = ({ children, isFetching = fal
     disabled={isFetching || rest.disabled}
     {...rest}
   >
-    {isFetching ? <CircularProgress size={20} /> : children}
+    {isFetching ? <CircularProgress size={24} /> : children}
   </MuiButton>
 )

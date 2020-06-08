@@ -81,9 +81,7 @@ export const login = (
     dispatch(loginSuccess({ user: data.user }));
   } catch (err) {
     dispatch(loginFailure())
-    return {
-      name: 'Invalid email or password',
-    }
+    return err.response.data.message
   }
 }
 

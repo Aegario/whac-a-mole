@@ -74,12 +74,12 @@ export const LoginForm = () => {
         name: '',
         password: '',
       }}
-      onSubmit={async values => {
+      onSubmit={async (values, { setFieldError }) => {
         const err = await dispatch(login(values))
         if (!err) {
           history.push(Routes.root)
         } else {
-          return err
+          setFieldError('name', err.toString())
         }
       }}
       validationSchema={Yup.object({
@@ -116,6 +116,7 @@ export const LoginForm = () => {
             css={buttonStyles}
             type='submit'
             disabled={!formik.isValid || !formik.dirty}
+            isFetching={formik.isSubmitting}
             fullWidth
           >
             Login
@@ -132,7 +133,7 @@ export const LoginForm = () => {
             </div>
             <Link
               css={actionStyles}
-              to={Routes.root}
+              to={Routes.login}
             >
               Forgot password?
             </Link>
