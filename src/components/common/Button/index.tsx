@@ -4,13 +4,18 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import { css } from '@emotion/core'
 import { Theme } from '@material-ui/core'
 
-const buttonStyles = (theme: Theme) => css`
+const buttonStyles = (theme: Theme, isFetching: boolean) => css`
+  && {
+    color: ${theme.palette.common.white};
+    background-color: ${isFetching ? 'rgba(0, 0, 0, 0.12)' : `${theme.palette.primary}`};
+  }
+  
   &&:disabled {
     color: ${theme.palette.common.white};
   }
   
-  && {
-    color: ${theme.palette.common.white};
+  &&:hover {
+    background-color: ${isFetching ? 'rgba(0, 0, 0, 0.12)' : `${theme.palette.primary}`};
   }
 `
 
@@ -20,12 +25,12 @@ interface CustomButtonProps extends ButtonProps {
 
 export const Button: React.FC<CustomButtonProps> = ({ children, isFetching = false, ...rest }) => (
   <MuiButton
-    css={buttonStyles}
+    css={(theme) => buttonStyles(theme, isFetching)}
     color='secondary'
     variant='contained'
     disabled={isFetching || rest.disabled}
     {...rest}
   >
-    {isFetching ? <CircularProgress size={24} /> : children}
+    {isFetching ? <CircularProgress size={24} color='secondary' /> : children}
   </MuiButton>
 )

@@ -24,6 +24,13 @@ import { fetchProfile } from 'ducks/modules/auth'
 import { Loader } from 'components/common/Loader'
 
 const theme = createMuiTheme({
+  overrides: {
+    MuiCircularProgress: {
+      colorSecondary: {
+        color: Colors.white,
+      },
+    },
+  },
   palette: {
     primary: {
       main: Colors.yellow,
