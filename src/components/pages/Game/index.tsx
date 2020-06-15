@@ -6,35 +6,15 @@ import { RootContainer } from 'components/common/RootContainer'
 import { Container } from 'components/common/Container'
 import { Header } from 'components/common/Header'
 import { Button } from 'components/common/Button'
-import { DifficultySelect } from 'components/pages/Game/DifficultySelect'
 import { Board } from 'components/pages/Game/Board'
-import { TimeLeft } from 'components/pages/Game/TimeLeft'
 import { useTimer } from 'hooks/useTimer'
 import { useDispatch, useSelector } from 'react-redux'
 import { State } from 'interfaces'
 import { scoreReset } from 'ducks/modules/game/score'
 import { postScore } from 'ducks/modules/game'
+import { GameHeader } from 'components/pages/Game/GameHeader'
 
 //#region Styles
-const mainHeaderStyles = css`
-  font-size: 64px;
-`
-
-const scoreHeaderStyles = css`
-  font-size: 54px;
-  position: relative;
-`
-
-const scoreStyles = (theme: Theme) => css`
-  margin-left: 22px;
-  display: inline-block;
-  box-sizing: border-box;
-  width: 84px;
-  text-align: center;
-  border-radius: 5px;
-  background-color: ${theme.palette.primary.light};
-`
-
 const buttonStyles = (theme: Theme) => css`
   width: 210px;
   height: 64px;
@@ -44,25 +24,12 @@ const buttonStyles = (theme: Theme) => css`
     color: ${theme.palette.common.black};
     font-size: 22px;
     letter-spacing: 6px;
-    margin-top: 104px;
+    margin-top: 8vh;
   }
   
   &&:disabled {
     color: #7e7d7d;
   }
-`
-
-const headerWrapperStyles = css`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding-top: 28px;
-`
-
-const mainWrapperStyles = css`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 `
 //#endregion
 
@@ -70,7 +37,7 @@ export const Game: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false)
   const score = useSelector<State, number>(state => state.game.score)
   const dispatch = useDispatch()
-  const timer = useTimer(10)
+  const timer = useTimer(15)
 
   const startGame = () => {
     setIsPlaying(true)
@@ -91,25 +58,11 @@ export const Game: React.FC = () => {
     <RootContainer>
       <Header />
       <Container>
-        <div css={headerWrapperStyles}>
-          <TimeLeft
-            timeUp={timer.timeUp}
-            timeLeft={timer.timeLeft}
-          />
-          <div css={mainWrapperStyles}>
-            <h1 css={mainHeaderStyles}>
-              {timer.timeUp ? 'GAME OVER!' : 'Whac-A-Mole!'}
-            </h1>
-            <h2 css={scoreHeaderStyles}>
-              Score: <span css={scoreStyles}>{score}</span>
-            </h2>
-          </div>
-          <DifficultySelect
-            isPlaying={isPlaying}
-            reset={timer.reset}
-            timeUp={timer.timeUp}
-          />
-        </div>
+        <GameHeader
+          score={score}
+          timer={timer}
+          isPlaying={isPlaying}
+        />
 
         <Board isPlaying={isPlaying} />
 

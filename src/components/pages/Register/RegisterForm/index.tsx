@@ -108,6 +108,7 @@ export const RegisterForm: React.FC = () => {
             css={buttonStyles}
             type='submit'
             disabled={!formik.isValid || !formik.dirty || !formik.values.passwordConfirm.length}
+            isFetching={formik.isSubmitting}
             fullWidth
           >
             Register

@@ -26,6 +26,9 @@ import { Loader } from 'components/common/Loader'
 const theme = createMuiTheme({
   overrides: {
     MuiCircularProgress: {
+      colorPrimary: {
+        color: Colors.yellowDark,
+      },
       colorSecondary: {
         color: Colors.white,
       },

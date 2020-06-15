@@ -1,13 +1,14 @@
 import React, { ChangeEvent } from 'react'
 import { MenuItem, Select } from '@material-ui/core'
+import { useDispatch, useSelector } from 'react-redux'
 import { css } from '@emotion/core'
 
 import { DifficultyLevels } from 'constants/difficultyLevels'
-import { useDispatch, useSelector } from 'react-redux'
 import { selectDifficulty } from 'ducks/modules/game/difficulty'
 import { scoreReset } from 'ducks/modules/game/score'
 import { State } from 'interfaces'
 
+//#region Styles
 const wrapperStyles = css`
   padding-top: 24px;
   display: flex;
@@ -24,6 +25,7 @@ const selectStyles = css`
   width: 150px;
   font-family: 'Barlow', sans-serif;
 `
+//#endregion
 
 interface DifficultySelectProps {
   isPlaying: boolean,
@@ -32,11 +34,10 @@ interface DifficultySelectProps {
 }
 
 export const DifficultySelect: React.FC<DifficultySelectProps> = ({ isPlaying, reset, timeUp }) => {
-  const dispatch = useDispatch()
   const difficulty = useSelector<State, string>(state => state.game.difficulty)
+  const dispatch = useDispatch()
 
-  // eslint-disable-next-line no-undef
-  const handleDifficultyChange = (e: ChangeEvent<{ name?: string; value: unknown}>) => {
+  const handleDifficultyChange = (e: ChangeEvent<{ name?: string; value: any}>) => {
     dispatch(selectDifficulty(e.target.value))
 
     if (timeUp) {

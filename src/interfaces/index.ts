@@ -14,3 +14,10 @@ export interface State {
   game: GameState,
   top: TopState,
 }
+
+export interface TimerInterface {
+  timeLeft: number,
+  timeUp: boolean,
+  start: () => void,
+  reset: () => void,
+}

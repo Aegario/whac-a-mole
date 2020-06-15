@@ -68,7 +68,6 @@ export const Board: React.FC<BoardProps> = ({ isPlaying }) => {
     dispatch(scoreIncrement())
   }
 
-
   const getRandomTime = (difficultyLevel: string) => {
     let min
     let max
